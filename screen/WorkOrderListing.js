@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import { Search, Filter, Plus, PieChart, Briefcase, Menu, Check,ChevronRight,CalendarCheck } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Footer from './FooterPage';
 export default function WorkOrdersList() {
-  const [activeTab, setActiveTab] = useState('ToDo');
+  const [activeTabs, setActiveTabs] = useState('ToDo');
   const [date, setDate] = useState(new Date()); // Set an initial date
   const [show, setShow] = useState(false);
+  const [activeTab, setActiveTab] = useState('WorkOrders');
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date; // Use selectedDate or keep the current date
@@ -36,7 +38,7 @@ export default function WorkOrdersList() {
 
   const renderWorkOrder = (order) => (
     <>
-    {activeTab == 'Done'?
+    {activeTabs == 'Done'?
     <TouchableOpacity key={order.id} style={styles.workOrderItem}>
       <View style={styles.workOrderLeft}>
         <Image
@@ -92,18 +94,18 @@ export default function WorkOrdersList() {
         </View>
         <View style={styles.tabs}>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'ToDo' && styles.activeTab]}
-            onPress={() => setActiveTab('ToDo')}
+            style={[styles.tab, activeTabs === 'ToDo' && styles.activeTab]}
+            onPress={() => setActiveTabs('ToDo')}
           >
-            <Text style={[styles.tabText, activeTab === 'ToDo' && styles.activeTabText]}>
+            <Text style={[styles.tabText, activeTabs === 'ToDo' && styles.activeTabText]}>
               ToDo
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'Done' && styles.activeTab]}
-            onPress={() => setActiveTab('Done')}
+            style={[styles.tab, activeTabs === 'Done' && styles.activeTab]}
+            onPress={() => setActiveTabs('Done')}
           >
-            <Text style={[styles.tabText, activeTab === 'Done' && styles.activeTabText]}>
+            <Text style={[styles.tabText, activeTabs === 'Done' && styles.activeTabText]}>
               Done
             </Text>
           </TouchableOpacity>
@@ -126,7 +128,7 @@ export default function WorkOrdersList() {
         <Plus size={24} color="#FFFFFF" />
       </TouchableOpacity>
 
-      <View style={styles.bottomNav}>
+      {/* <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.bottomNavItem}>
           <PieChart size={24} color="#666" />
           <Text style={styles.bottomNavText}>Overview</Text>
@@ -143,7 +145,11 @@ export default function WorkOrdersList() {
           <Menu size={24} color="#666" />
           <Text style={styles.bottomNavText}>More</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
+      <Footer
+        activeTab={activeTab}
+        onTabPress={(tab) => setActiveTab(tab)}
+      />
     </SafeAreaView>
   );
 }

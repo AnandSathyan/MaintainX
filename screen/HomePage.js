@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Clock, Plus, QrCode, HelpCircle, AlertCircle, CheckCircle, Menu, Briefcase, PieChart, User } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
+import Footer from './FooterPage';
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 48) / 2; // 16px padding on each side, 16px gap
@@ -19,6 +20,7 @@ const cardWidth = (width - 48) / 2; // 16px padding on each side, 16px gap
 export default function DashboardScreen() {
   const [scaleAnim] = useState(new Animated.Value(0.95));
     const navigation = useNavigation();
+    const [activeTab, setActiveTab] = useState('Overview');
   React.useEffect(() => {
     Animated.timing(scaleAnim, {
       toValue: 1,
@@ -138,16 +140,16 @@ export default function DashboardScreen() {
         <Text style={styles.createButtonText}>Create</Text>
       </TouchableOpacity>
 
-      <View style={styles.bottomNav}>
+      {/* <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.bottomNavItem}>
           <PieChart size={24} color="#2196F3" />
           <Text style={[styles.bottomNavText, styles.bottomNavActive]}>Overview</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate('Filter')} style={styles.bottomNavItem}>
+        <TouchableOpacity onPress={()=>navigation.navigate('WorkOrderList')} style={styles.bottomNavItem}>
           <Briefcase size={24} color="#757575" />
           <Text style={styles.bottomNavText}>Work Orders</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.bottomNavItem}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Asset')} style={styles.bottomNavItem}>
           <Briefcase size={24} color="#757575" />
           <Text style={styles.bottomNavText}>Asset</Text>
         </TouchableOpacity>
@@ -155,7 +157,11 @@ export default function DashboardScreen() {
           <Menu size={24} color="#757575" />
           <Text style={styles.bottomNavText}>More</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
+      <Footer
+        activeTab={activeTab}
+        onTabPress={(tab) => setActiveTab(tab)}
+      />
     </SafeAreaView>
   );
 }
