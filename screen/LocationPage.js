@@ -69,11 +69,13 @@ export default function LocationsScreen() {
         <Plus size={24} color="#FFFFFF" />
         <Text style={styles.floatingButtonText}>New Location</Text>
       </TouchableOpacity>
+      <View style={styles.footer}>
       <Footer
         // style={styles.footer}
         activeTab={activeTab}
         onTabPress={(tab) => setActiveTab(tab)}
       />
+      </View>
     </SafeAreaView>
   );
 }
@@ -189,10 +191,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
+    marginBottom:60
   },
   floatingButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '500',
+   
   },
 });
